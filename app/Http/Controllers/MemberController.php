@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Models\Factory;
 use App\Models\Models\Union;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class MemberController extends Controller
     public function create()
     {
         $unions = Union::where('is_active',1)->get();
-        return view('member.add',compact('unions'));
+        $factories = Factory::where('is_active',1)->get();
+        return view('member.add',compact('unions', 'factories'));
     }
 
     /**

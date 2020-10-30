@@ -31,6 +31,9 @@
                             <div class="col-md-8">
                                 <select class="form-control" id="factory_id" name="factory_id">
                                     <option value="">Select One</option>
+                                    @foreach ($factories as $factory)
+                                    <option value="{{ $factory->id }}">{{ $factory->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
