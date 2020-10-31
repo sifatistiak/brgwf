@@ -39,7 +39,14 @@ Route::get('pages', function () {
  */
 
 Route::resource('member', 'App\Http\Controllers\MemberController');
-Route::post('member/ajax', 'App\Http\Controllers\MemberController@indexAjax')->name('member.indexAjax');
+//filter member
+Route::post('member/filter', 'App\Http\Controllers\MemberController@filter')->name('member.filter');
+//non-member
+Route::get('non-member', 'App\Http\Controllers\MemberController@nonMember')->name('non-member.index');
+Route::get('non-member/create', 'App\Http\Controllers\MemberController@nonMemberCreate')->name('non-member.create');
+Route::post('non-member', 'App\Http\Controllers\MemberController@nonMemberStore')->name('non-member.store');
+Route::get('non-member/{id}/edit', 'App\Http\Controllers\MemberController@nonMemberEdit')->name('non-member.edit');
+Route::put('non-member/{id}', 'App\Http\Controllers\MemberController@nonMemberUpdate')->name('non-member.update');
 
 
 /**
@@ -47,6 +54,10 @@ Route::post('member/ajax', 'App\Http\Controllers\MemberController@indexAjax')->n
  * Accounts
  * -------------------------------------------------------------------------
  */
+
+Route::get('collection','App\Http\Controllers\AccountController@collection')->name('collection.index');
+Route::get('collection/add','App\Http\Controllers\AccountController@collectionCreate')->name('collection.create');
+Route::post('collection','App\Http\Controllers\AccountController@collectionStore')->name('collection.store');
 
 /**
  * -------------------------------------------------------------------------

@@ -256,7 +256,7 @@ return [
                 [
                     'text' => 'Non Member',
                     'icon' => 'fas fa-fw fa-user-slash',
-                    'url'  => 'member/non-member',
+                    'url'  => 'non-member',
                 ],
                 [
                     'text' => 'Search Member',
@@ -275,12 +275,12 @@ return [
                 [
                     'text' => 'Collection',
                     'icon' => 'fas fa-fw fa-paper-plane',
-                    'url'  => '#',
+                    'url'  => 'collection/create',
                 ],
                 [
                     'text' => 'Income Statement',
                     'icon' => 'fas fa-fw fa-stream',
-                    'url'  => '#',
+                    'url'  => 'collection',
                 ],
                 [
                     'text' => 'Expense',
