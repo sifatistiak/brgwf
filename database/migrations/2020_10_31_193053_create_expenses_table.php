@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCollectionsTable extends Migration
+class CreateExpensesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateCollectionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('collections', function (Blueprint $table) {
+        Schema::create('expenses', function (Blueprint $table) {
             $table->id();
-            $table->string('membership_id');
+            $table->string('pay_to');
             $table->date('transaction_date');
-            $table->string('name');
-            $table->string('ref_name');
             $table->string('remarks')->nullable();
             $table->string('bill_type');
-            $table->date('month');
+            $table->date('month')->nullable();
             $table->string('amount');
             $table->timestamps();
         });
@@ -34,6 +32,6 @@ class CreateCollectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('collections');
+        Schema::dropIfExists('expenses');
     }
 }

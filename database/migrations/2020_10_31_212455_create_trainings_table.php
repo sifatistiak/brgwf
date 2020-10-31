@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCollectionsTable extends Migration
+class CreateTrainingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateCollectionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('collections', function (Blueprint $table) {
+        Schema::create('trainings', function (Blueprint $table) {
             $table->id();
-            $table->string('membership_id');
-            $table->date('transaction_date');
             $table->string('name');
-            $table->string('ref_name');
-            $table->string('remarks')->nullable();
-            $table->string('bill_type');
-            $table->date('month');
-            $table->string('amount');
+            $table->string('code')->nullable();
+            $table->string('duration')->nullable();
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->string('serial_no')->nullable();
+            $table->tinyInteger('is_active')->default(0);
             $table->timestamps();
         });
     }
@@ -34,6 +33,6 @@ class CreateCollectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('collections');
+        Schema::dropIfExists('trainings');
     }
 }

@@ -54,16 +54,25 @@ Route::put('non-member/{id}', 'App\Http\Controllers\MemberController@nonMemberUp
  * Accounts
  * -------------------------------------------------------------------------
  */
-
+//Collection
 Route::get('collection','App\Http\Controllers\AccountController@collection')->name('collection.index');
+Route::post('collection/filter','App\Http\Controllers\AccountController@collection')->name('collection.filter');
 Route::get('collection/add','App\Http\Controllers\AccountController@collectionCreate')->name('collection.create');
 Route::post('collection','App\Http\Controllers\AccountController@collectionStore')->name('collection.store');
+//Expense
+Route::get('expense','App\Http\Controllers\AccountController@expense')->name('expense.index');
+Route::post('expense/filter','App\Http\Controllers\AccountController@expense')->name('expense.filter');
+Route::get('expense/add','App\Http\Controllers\AccountController@expenseCreate')->name('expense.create');
+Route::post('expense','App\Http\Controllers\AccountController@expenseStore')->name('expense.store');
 
 /**
  * -------------------------------------------------------------------------
  * Training
  * -------------------------------------------------------------------------
  */
+Route::resource('training', 'App\Http\Controllers\TrainingController');
+Route::resource('trainer', 'App\Http\Controllers\TrainerController');
+Route::resource('training-assign', 'App\Http\Controllers\TrainingMemberMapController');
 
 /**
  * -------------------------------------------------------------------------

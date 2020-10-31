@@ -275,7 +275,7 @@ return [
                 [
                     'text' => 'Collection',
                     'icon' => 'fas fa-fw fa-paper-plane',
-                    'url'  => 'collection/create',
+                    'url'  => 'collection/add',
                 ],
                 [
                     'text' => 'Income Statement',
@@ -285,12 +285,12 @@ return [
                 [
                     'text' => 'Expense',
                     'icon' => 'fab fa-fw fa-centercode',
-                    'url'  => '#',
+                    'url'  => 'expense/add',
                 ],
                 [
                     'text' => 'Expense Statement',
                     'icon' => 'fab fa-fw fa-buffer',
-                    'url'  => '#',
+                    'url'  => 'expense',
                 ],
             ]
         ],
@@ -304,22 +304,22 @@ return [
                 [
                     'text' => 'Training List',
                     'icon' => 'fas fa-fw fa-list',
-                    'url'  => '#',
+                    'url'  => 'training',
                 ],
                 [
                     'text' => 'Add New Training',
                     'icon' => 'fas fa-fw fa-plus',
-                    'url'  => '#',
+                    'url'  => 'training/create',
                 ],
                 [
                     'text' => 'Trainer',
                     'icon' => 'fas fa-fw fa-user-edit',
-                    'url'  => '#',
+                    'url'  => 'trainer',
                 ],
                 [
                     'text' => 'Training Assign',
                     'icon' => 'fas fa-fw fa-street-view',
-                    'url'  => '#',
+                    'url'  => 'training-assign/create',
                 ],
             ]
         ],
@@ -568,16 +568,16 @@ return [
             ],
         ],
         'Select2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
                 ],
             ],
