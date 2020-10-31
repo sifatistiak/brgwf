@@ -17,6 +17,7 @@ class CreateMembersTable extends Migration
             $table->id();
             $table->foreignId('union_id')->nullable()->constrained('unions');
             $table->foreignId('factory_id')->nullable()->constrained('factories');
+            $table->string('membership_no')->unique()->nullable();
             $table->string('full_name')->nullable();
             $table->string('gender')->nullable();
             $table->date('date_of_birth')->nullable();

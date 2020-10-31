@@ -39,6 +39,7 @@ Route::get('pages', function () {
  */
 
 Route::resource('member', 'App\Http\Controllers\MemberController');
+Route::post('member/ajax', 'App\Http\Controllers\MemberController@indexAjax')->name('member.indexAjax');
 
 
 /**

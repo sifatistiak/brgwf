@@ -19,7 +19,7 @@
                                 <th>Sl</th>
                                 <th>Factory Name</th>
                                 <th>Phone</th>
-                                <th>Permanent Address</th>
+                                <th class="w-25">Present Address</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -29,7 +29,7 @@
                                 <td> {{ $loop->index+1 }} </td>
                                 <td> {{ $factory->name }} </td>
                                 <td> {{ $factory->phone }} </td>
-                                <td> {{ $factory->permanent_address }} </td>
+                                <td> {{ $factory->present_address }} </td>
 
                                 <td class="d-flex justify-content-between">
                                     <a href="{{ route('factory.edit', $factory->id) }}"class="btn btn-outline-info">&#9998; Edit </a>
