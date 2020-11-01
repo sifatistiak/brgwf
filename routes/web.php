@@ -39,8 +39,10 @@ Route::get('pages', function () {
  */
 
 Route::resource('member', 'App\Http\Controllers\MemberController');
+Route::get('member-search', 'App\Http\Controllers\MemberController@index');
 //filter member
 Route::post('member/filter', 'App\Http\Controllers\MemberController@filter')->name('member.filter');
+Route::post('non-member/filter', 'App\Http\Controllers\MemberController@nonMemberFilter')->name('non-member.filter');
 //non-member
 Route::get('non-member', 'App\Http\Controllers\MemberController@nonMember')->name('non-member.index');
 Route::get('non-member/create', 'App\Http\Controllers\MemberController@nonMemberCreate')->name('non-member.create');

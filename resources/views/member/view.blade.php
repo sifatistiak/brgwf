@@ -10,13 +10,14 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Memeber Lists</h3>
+                    <hr>
                     <form action="{{ route('member.filter') }}" method="post">
                         @csrf
                         <div class="row" style="display: flex; justify-content: center;">
                             <select name="box_type" id="box_type">
-                                <option value="MemberID" selected>MemberID</option>
-                                <option value="RegNo">RegNo</option>
-                                <option value="NID">NID</option>
+                                <option value="membership_no" selected>MemberID</option>
+                                <option value="reg_no">RegNo</option>
+                                <option value="nid">NID</option>
                             </select>
                             <input class="mx-2" type="text" name="box_value" id="box_value">
                             <label for="union">Union</label>
@@ -59,17 +60,59 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Sl</th>
-                                <th>Member Name</th>
-                                <th>No</th>
+                                <th>Photo</th>
+                                <th>
+                                    ID (Membership No) <br>
+                                    Card No / NID <br>
+                                    Factory ID / Reg No
+                                </th>
+                                <th>
+                                    Name <br>
+                                    Father Name <br>
+                                    Mother Name
+                                </th>
+                                <th>
+                                    DOB <br>
+                                    Religion <br>
+                                    Gender
+                                </th>
+                                <th>
+                                    Union
+                                </th>
+                                <th>
+                                    Action
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($members as $member)
                             <tr>
-                                <td> {{  $loop->index+1 }}</td>
-                                <td> {{  $member->full_name }}</td>
-                                <td> {{  $member->reg_no }}</td>
+                                <td>
+                                    <img src="{{ asset('member_image/'.$member->photo) }}" style="width:90px"
+                                        onerror="this.onerror=null;this.src='{{ asset('member_image/no_photo.png') }}';">
+                                </td>
+                                <td>
+                                     {{ $member->membership_no }} <br>
+                                     {{ $member->nid }} <br>
+                                     {{ $member->reg_no }}
+                                </td>
+                                <td>
+                                    {{ $member->full_name }} <br>
+                                    {{ $member->father_name }} <br>
+                                    {{ $member->mother_name }}
+                                </td>
+                                <td>
+                                    {{ date('d-M-y',strtotime($member->dob)) }} <br>
+                                    {{ $member->religion->name ?? 'N/A' }} <br>
+                                    {{ $member->gender }}
+                                </td>
+                                <td>
+                                    {{ $member->union->name ?? 'N/A' }}
+                                </td>
+                                <td class="d-flex justify-content-between">
+                                    <a href="{{ route('member.edit', $member->id) }}" class="btn btn-outline-info">&#9998; Edit</a>
+                                    <a href="{{ route('training-assign.create') }}">Training</a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

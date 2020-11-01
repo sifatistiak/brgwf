@@ -27,7 +27,7 @@ class MemberController extends Controller
     {
         $unions = Union::where('is_active', 1)->get();
         $factories = Factory::where('is_active', 1)->get();
-        $members = Member::where('is_active', 1)->paginate(100);
+        $members = Member::where('is_active', 1)->with('religion')->with('union')->paginate(100);
         return view('member.view', compact('members', 'unions', 'factories'));
     }
 
@@ -108,7 +108,17 @@ class MemberController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $member = Member::findOrFail($id);
+
+        $unions = Union::where('is_active', 1)->get();
+        $factories = Factory::where('is_active', 1)->get();
+        $member_categories = Category::where('status', 1)->get();
+        $educations = Education::where('status', 1)->get();
+        $designations = Designation::where('status', 1)->get();
+        $religions = Religion::where('status', 1)->get();
+
+        return view('member.edit', compact('member', 'designations', 'religions', 'unions', 'factories', 'member_categories', 'educations'));
     }
 
     /**
@@ -120,7 +130,29 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // return $request->all();
+        $member = Member::findOrFail($id);
+        $img_name = $member;
+
+        $member->update($request->all());
+
+        if ($request->webimg !== null) {
+            // got Webcam Image
+
+            $binary_data = base64_decode($request->webimg);
+            $result = file_put_contents('member_image/' . $img_name, $binary_data);
+        } else {
+
+            if ($request->hasFile('photo')) {
+                Image::make($request->file('photo'))->resize(250, 250)->save('member_image/' . $img_name);
+            } else {
+            }
+        }
+
+        session()->flash('status', "Updated Successfully");
+
+
+        return redirect()->route('member.index');
     }
 
     /**
@@ -137,7 +169,38 @@ class MemberController extends Controller
 
     public function filter(Request $request)
     {
-        return $request->all();
+        // return $request->all();
+        $unions = Union::where('is_active', 1)->get();
+        $factories = Factory::where('is_active', 1)->get();
+        $members = Member::where('is_active', 1)->with('religion')->with('union')->paginate(100);
+
+
+        if($request->box_value !== null){
+            $members = Member::where('is_active', $request->is_active ?? 0)
+            ->where($request->box_type, $request->box_value)
+            ->with('religion')->with('union')
+            ->orderBy($request->box_type, $request->sort)
+             ->paginate(100);
+        }
+
+        if($request->union !== null){
+            $members = Member::where('is_active', $request->is_active ?? 0)
+            ->where('union_id', $request->union)
+            ->with('religion')->with('union')
+            ->orderBy('union_id', $request->sort)
+            ->paginate(100);
+        }
+
+        if($request->factory !== null){
+            $members = Member::where('is_active', $request->is_active ?? 0)
+            ->where('factory_id', $request->factory)
+            ->with('religion')->with('union')
+            ->orderBy('factory_id', $request->sort)
+            ->paginate(100);
+        }
+
+
+        return view('member.view', compact('members', 'unions', 'factories'));
     }
 
     //non-member
@@ -192,5 +255,76 @@ class MemberController extends Controller
         if ($request->has('save')) {
             return redirect()->route('non-member.create');
         }
+    }
+
+    public function NonMemberEdit($id)
+    {
+
+        $member = NonMember::findOrFail($id);
+
+        $unions = Union::where('is_active', 1)->get();
+        $factories = Factory::where('is_active', 1)->get();
+        $member_categories = Category::where('status', 1)->get();
+        $educations = Education::where('status', 1)->get();
+        $designations = Designation::where('status', 1)->get();
+        $religions = Religion::where('status', 1)->get();
+
+        return view('member.edit-non-member', compact('member', 'designations', 'religions', 'unions', 'factories', 'member_categories', 'educations'));
+    }
+
+
+    public function nonMemberUpdate(Request $request, $id)
+    {
+        // return $request->all();
+        $member = NonMember::findOrFail($id);
+        $img_name = $member;
+
+        $member->update($request->all());
+
+        if ($request->webimg !== null) {
+            // got Webcam Image
+
+            $binary_data = base64_decode($request->webimg);
+            $result = file_put_contents('member_image/' . $img_name, $binary_data);
+        } else {
+
+            if ($request->hasFile('photo')) {
+                Image::make($request->file('photo'))->resize(250, 250)->save('member_image/' . $img_name);
+            } else {
+            }
+        }
+
+        session()->flash('status', "Updated Successfully");
+
+
+        return redirect()->route('member.index');
+    }
+
+
+    public function nonMemberFilter(Request $request)
+    {
+        // return $request->all();
+
+        $factories = Factory::where('is_active', 1)->get();
+        $categories = Category::where('status', 1)->get();
+        $members = NonMember::where('is_active', 1)->with('religion')->with('factory')->paginate(100);
+
+
+        if ($request->union !== null) {
+            $members = NonMember::where('is_active', $request->is_active ?? 0)
+                ->where('category_id', $request->category_id)
+                ->with('religion')->with('union')
+                ->paginate(50);
+        }
+
+        if ($request->factory !== null) {
+            $members = NonMember::where('is_active', $request->is_active ?? 0)
+                ->where('factory_id', $request->factory)
+                ->with('religion')->with('union')
+                ->paginate(50);
+        }
+
+
+        return view('member.view-non-member', compact('members', 'factories','categories'));
     }
 }

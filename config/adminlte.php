@@ -261,7 +261,7 @@ return [
                 [
                     'text' => 'Search Member',
                     'icon' => 'fas fa-fw fa-search',
-                    'url'  => 'member',
+                    'url'  => 'member-search',
                 ],
             ]
         ],
