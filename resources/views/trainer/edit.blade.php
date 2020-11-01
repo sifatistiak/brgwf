@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'BRGWF Trainer Add')
+@section('title', 'BRGWF Trainer Edit')
 
 @section('content')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.swf">
@@ -9,11 +9,12 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="mb-0">Trainer Add</h3>
+                    <h3 class="mb-0">Trainer Edit</h3>
                 </div>
                 <div class="card-body">
-                    <form class="form-horizontal" action="{{ route('trainer.store') }}" enctype="multipart/form-data"
-                        method="post">
+                    <form class="form-horizontal" action="{{ route('trainer.update',$trainer->id) }}"
+                        enctype="multipart/form-data" method="post">
+                        @method('PUT')
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
@@ -21,14 +22,15 @@
                                     <label class="control-label col-md-4" for="unique_id">Unique ID</label>
                                     <div class="col-md-9">
                                         <input class="form-control" id="unique_id" name="unique_id" required="required"
-                                            type="text" value="{{ $unique_id }}" readonly>
+                                            type="text" value="{{ $trainer->unique_id }}" readonly>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="organization">Organization</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="organization" name="organization" type="text">
+                                        <input class="form-control" id="organization" name="organization"
+                                            value="{{ $trainer->organization }}" type="text">
                                     </div>
                                 </div>
 
@@ -36,28 +38,33 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="name">Name</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="name" name="name" required="required" type="text" value="">
+                                        <input class="form-control" id="name" name="name" required="required"
+                                            type="text" value="{{ $trainer->name }}">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                        <label class="control-label col-md-4" for="gender">Gender</label>
-                                        <div class="col-md-9">
-                                            <select class="form-control" id="gender" name="gender">
-                                                <option value="Male">Male</option>
-                                                <option value="Female">Female</option>
-                                                <option value="Other">Other</option>
-                                            </select>
+                                    <label class="control-label col-md-4" for="gender">Gender</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control" id="gender" name="gender">
+                                            <option value="Male" {{ ($trainer->gender == "Male") ? "selected" : "" }}>
+                                                Male</option>
+                                            <option value="Female"
+                                                {{ ($trainer->gender == "Female") ? "selected" : "" }}>Female</option>
+                                            <option value="Other" {{ ($trainer->gender == "Other") ? "selected" : "" }}>
+                                                Other</option>
+                                        </select>
 
-                                        </div>
                                     </div>
+                                </div>
 
-                                    <div class="form-group">
-                                        <label class="control-label col-md-4" for="dob">Date Of Birth</label>
-                                        <div class="col-md-9">
-                                            <input class="form-control datepicker" id="dob" name="dob" type="date">
-                                        </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="dob">Date Of Birth</label>
+                                    <div class="col-md-9">
+                                        <input class="form-control datepicker" id="dob" name="dob" type="date"
+                                            value="{{ $trainer->dob }}">
                                     </div>
+                                </div>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="department_id">Department</label>
@@ -65,7 +72,9 @@
                                         <select class="form-control" id="department_id" name="department_id">
                                             <option value="">Select One</option>
                                             @foreach ($departments as $department)
-                                            <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                            <option value="{{ $department->id }}"
+                                                {{ ($department->id == $trainer->department_id)?"selected":'' }}>
+                                                {{ $department->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -77,7 +86,9 @@
                                         <select class="form-control" id="designation_id" name="designation_id">
                                             <option value="">Select One</option>
                                             @foreach ($designations as $designation)
-                                            <option value="{{ $designation->id }}">{{ $designation->name }}</option>
+                                            <option value="{{ $designation->id }}"
+                                                {{ ($designation->id == $trainer->designation_id)?"selected":'' }}>
+                                                {{ $designation->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -89,7 +100,9 @@
                                         <select class="form-control" id="course_id" name="course_id">
                                             <option value="">Select One</option>
                                             @foreach ($courses as $course)
-                                            <option value="{{ $course->id }}">{{ $course->name }}</option>
+                                            <option value="{{ $course->id }}"
+                                                {{ ($course->id == $trainer->course_id)?"selected":'' }}>
+                                                {{ $course->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -111,7 +124,7 @@
                                 </div>
 
 
-                                <img id="blah" class="img-thumbnail"
+                                <img id="blah" class="img-thumbnail" src="{{ asset('trainer_image/'.$trainer->photo) }}"
                                     style="float:left; width:250px; height:200px; margin-right:10px; margin-top: 25px;">
 
 
@@ -131,7 +144,8 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="mobile">Mobile</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="mobile" name="mobile" type="text" value="">
+                                        <input class="form-control" id="mobile" name="mobile" type="text"
+                                            value="{{ $trainer->mobile }}">
                                     </div>
                                 </div>
 
@@ -139,7 +153,8 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="nid">NID No</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="nid" name="nid" type="text" value="">
+                                        <input class="form-control" id="nid" name="nid" type="text"
+                                            value="{{ $trainer->nid }}">
 
                                     </div>
                                 </div>
@@ -147,8 +162,8 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5" for="present_address">Present Address</label>
                                     <div class="col-md-9">
-                                        <textarea class="form-control" cols="20" id="present_address" name="present_address"
-                                        rows="3"></textarea>
+                                        <textarea class="form-control" cols="20" id="present_address"
+                                            name="present_address" rows="3">{{ $trainer->present_address }}</textarea>
 
                                     </div>
                                 </div>
@@ -158,12 +173,13 @@
 
                         <div class="form-group">
                             <label class="control-label col-md-2" for="is_active">
-                                <input id="is_active" name="is_active" value="1" type="checkbox" class="minimal">
+                                <input id="is_active" name="is_active" value="1" type="checkbox" class="minimal"
+                                    {{ ($trainer->is_active == 1) ? 'checked' : ''}}>
                                 Is Active
                             </label>
                         </div>
 
-                        <a class="btn btn-info" href="">Back to List</a>
+                        <a class="btn btn-info" href="{{ route('trainer.index') }}">Back to List</a>
                         <input type="submit" name="save" value="Save" class="btn btn-primary pull-right">
 
                     </form>

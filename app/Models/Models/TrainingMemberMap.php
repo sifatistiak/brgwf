@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class TrainingMemberMap extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
 }

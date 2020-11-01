@@ -18,6 +18,12 @@ class TrainingController extends Controller
         return view('training.view', compact('trainings'));
     }
 
+    public function report()
+    {
+        $trainings = Training::orderBy('name')->get();
+        return view('training.report', compact('trainings'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -36,7 +42,9 @@ class TrainingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Training::create($request->all());
+        session()->flash('status', "Created Successfully");
+        return redirect()->route('training.index');
     }
 
     /**
@@ -58,7 +66,8 @@ class TrainingController extends Controller
      */
     public function edit($id)
     {
-        //
+        $training = Training::findOrFail($id);
+        return view('training.edit',compact('training'));
     }
 
     /**
@@ -70,7 +79,10 @@ class TrainingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $training = Training::findOrFail($id);
+        $training->update($request->all());
+        return redirect()->route('training.index');
+
     }
 
     /**

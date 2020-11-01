@@ -7,6 +7,7 @@ use App\Models\Models\Member;
 use App\Models\Models\NonMember;
 use App\Models\Models\Trainer;
 use App\Models\Models\Training;
+use App\Models\Models\TrainingMemberMap;
 use App\Models\Models\Union;
 use Illuminate\Http\Request;
 
@@ -46,7 +47,11 @@ class TrainingMemberMapController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        foreach ($request->member_name as $member_name) {
+            TrainingMemberMap::create(array_merge($request->all(),['member_name' => $member_name]));
+        }
+        session()->flash('status', "Created Successfully");
+        return redirect()->back();
     }
 
     /**

@@ -17,7 +17,7 @@
 
                             <label for="bill_type">Account</label>
                             <select class="mx-2" name="bill_type" id="bill_type">
-                                <option selected>Select One</option>
+                                <option value="" selected>Select One</option>
                                 <option value="Subscription Fee">Subscription Fee</option>
                                 <option value="Others">Others</option>
                             </select>

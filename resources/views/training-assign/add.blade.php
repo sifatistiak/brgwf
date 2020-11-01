@@ -67,8 +67,7 @@
                             <div class="input-group">
                                 <label class="col-md-2" for="member_name">Member Name</label>
                                 <div id="for_member">
-                                    <select name="member_name[]" id="member_name" multiple="multiple"
-                                        class="input-group col-md-12 js-example-basic-multiple">
+                                    <select name="member_name[]" id="member_name" multiple="multiple" class="input-group col-md-12 js-example-basic-multiple">
                                         <option></option>
                                         @foreach ($members as $member_name)
                                         <option value="{{ $member_name->full_name }}">{{ $member_name->full_name }}
@@ -80,8 +79,7 @@
                                 <span class="input-group-addon col-md-1"></span>
 
                                 <label class="col-md-2" for="training_date">Training Date</label>
-                                <input type="date" class="form-control input-group col-md-4" id="training_date"
-                                    name="training_date">
+                                <input type="date" class="form-control input-group col-md-4" id="training_date" name="training_date">
 
                             </div>
                         </div>
@@ -100,34 +98,30 @@
                                 <span class="input-group-addon col-md-1"></span>
 
                                 <label class="col-md-2" for="organized_by">Organized By</label>
-                                <input type="text" class="form-control input-group col-md-4" id="organized_by"
-                                    name="organized_by">
+                                <input type="text" class="form-control input-group col-md-4" id="organized_by" name="organized_by">
 
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="col-md-2" for="center_name">Center Name</label>
-                                <input type="text" class="form-control input-group col-md-10" id="center_name"
-                                    name="center_name">
+                                <input type="text" class="form-control input-group col-md-10" id="center_name" name="center_name">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="col-md-2" for="remarks">Remarks</label>
-                                <input type="text" class="form-control input-group col-md-10" id="remarks"
-                                    name="remarks">
+                                <input type="text" class="form-control input-group col-md-10" id="remarks" name="remarks">
                             </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
 
-                </form>
 
-                <div class="box-footer mt-5">
-                    <a href="{{ route('training.index') }}" class="btn btn-info">Back to List</a>
-                    <button type="submit" class="btn btn-success float-right">Submit Create</button>
-                </div>
+                    <div class="box-footer mt-5">
+                        <button type="submit" class="btn btn-success float-right">Submit Create</button>
+                    </div>
+                </form>
             </div>
             <!-- /.box -->
         </div>
@@ -143,8 +137,12 @@
     function ShowHideDiv(chk) {
         var member_name = document.getElementById("member_name");
         var non_member_name = document.getElementById("non_member_name");
-        if($(chk).is(":checked")){
-            // $('#for_member').hide();
+        if ($(chk).is(":checked")) {
+
+            document.getElementById("factory").disabled = true;
+            document.getElementById("union").disabled = true;
+
+
             var data = `<select name="member_name[]" id="member_name" multiple="multiple" class="js-example-basic-multiple input-group col-md-12">
                 <option></option>
                 @foreach ($nonmembers as $member_name)
@@ -155,16 +153,19 @@
             $('#for_member').html(data);
             $('#member_name').select2();
 
-        }else{
-           var data = `<select name="member_name[]" id="member_name" multiple="multiple" class="js-example-basic-multiple input-group col-md-12">
+        } else {
+            document.getElementById("factory").disabled = false;
+            document.getElementById("union").disabled = false;
+
+            var data = `<select name="member_name[]" id="member_name" multiple="multiple" class="js-example-basic-multiple input-group col-md-12">
             <option></option>
             @foreach ($members as $member_name)
             <option value="{{ $member_name->full_name }}">{{ $member_name->full_name }}
             </option>
             @endforeach
         </select>`;
-        $('#for_member').html(data);
-        $('#member_name').select2();
+            $('#for_member').html(data);
+            $('#member_name').select2();
         }
     }
 </script>

@@ -18,9 +18,9 @@
 
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <label class="col-md-2" for="membership">Membership No</label>
-                                        <input type="text" class="form-control input-group col-md-3" id="membership"
-                                            name="membership">
+                                        <label class="col-md-2" for="membership_id">Membership No</label>
+                                        <input type="text" class="form-control input-group col-md-3" id="membership_id"
+                                            name="membership_id">
                                         <span class="input-group-addon col-md-1"></span>
                                         <label class="col-md-2" for="trans_date">Trans Date</label>
                                         <input type="date" class="form-control input-group col-md-3"
@@ -58,8 +58,7 @@
                                     <thead>
                                         <tr>
                                             <td>Bill/Fees Head Name</td>
-                                            <td>From Month</td>
-                                            <td>To Month</td>
+                                            <td>Month</td>
                                             <td>Amount</td>
                                             <td>Action</td>
                                         </tr>
@@ -73,15 +72,14 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <input type="month" name="from_month" id="from_month">
+                                                <input type="month" name="month" id="month">
                                             </td>
-                                            <td>
-                                                <input type="month" name="to_month" id="to_month">
-                                            </td>
+
                                             <td>
                                                 <input type="number" name="amount" id="amount" value="0" min="0">
                                             </td>
                                             <td>
+                                                <button type="submit" disabled style="display: none" aria-hidden="true"></button>
                                                 <input type="submit" name="save" value="Add Item" class="btn btn-primary pull-right">
                                             </td>
                                         </tr>
@@ -89,9 +87,8 @@
 
                                 </table>
                                 </center>
-
                             </form>
-                            <a class="btn btn-info" href="">Back to List</a>
+                            {{-- <a class="btn btn-info" href="">Back to List</a> --}}
                 </div>
             </div>
         </div>
@@ -101,6 +98,15 @@
 @section('js')
 
 <script>
-   
+$("#membership_id").on("keydown",function search(e) {
+    if(e.keyCode == 13) {
+        var id = $(this).val();
+        $.get( "/collection-ajax/"+id, function( data ) {
+            console.log(data);
+            $('#name').val(data.full_name);
+            $('#ref_name').val(data.type);
+        });
+    }
+});
 </script>
 @stop

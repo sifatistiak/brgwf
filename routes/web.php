@@ -58,15 +58,16 @@ Route::put('non-member/{id}', 'App\Http\Controllers\MemberController@nonMemberUp
  */
 //Collection
 Route::get('collection','App\Http\Controllers\AccountController@collection')->name('collection.index');
-Route::post('collection/filter','App\Http\Controllers\AccountController@collection')->name('collection.filter');
+Route::post('collection/filter','App\Http\Controllers\AccountController@collectionFilter')->name('collection.filter');
 Route::get('collection/add','App\Http\Controllers\AccountController@collectionCreate')->name('collection.create');
 Route::post('collection','App\Http\Controllers\AccountController@collectionStore')->name('collection.store');
 //Expense
 Route::get('expense','App\Http\Controllers\AccountController@expense')->name('expense.index');
-Route::post('expense/filter','App\Http\Controllers\AccountController@expense')->name('expense.filter');
+Route::post('expense/filter', 'App\Http\Controllers\AccountController@expenseFilter')->name('expense.filter');
 Route::get('expense/add','App\Http\Controllers\AccountController@expenseCreate')->name('expense.create');
 Route::post('expense','App\Http\Controllers\AccountController@expenseStore')->name('expense.store');
-
+//ajax
+Route::get('collection-ajax/{id}', 'App\Http\Controllers\AccountController@ajax');
 /**
  * -------------------------------------------------------------------------
  * Training
@@ -89,6 +90,12 @@ Route::post('sms', 'App\Http\Controllers\SmsController@store')->name('sms.store'
  * -------------------------------------------------------------------------
  */
 
+ Route::get('report-member', 'App\Http\Controllers\MemberController@index');
+ Route::get('report-training', 'App\Http\Controllers\TrainingController@index');
+ Route::get('subscription-history', 'App\Http\Controllers\AccountController@index');
+ Route::get('training-member', 'App\Http\Controllers\TrainingController@report');
+ Route::post('training-member-filter', 'App\Http\Controllers\TrainingController@filter');
+ Route::get('date-collection', 'App\Http\Controllers\AccountController@collection');
 
 /**
  * -------------------------------------------------------------------------

@@ -17,7 +17,7 @@
 
                             <label for="bill_type">Account</label>
                             <select class="mx-2" name="bill_type" id="bill_type">
-                                <option selected>Select One</option>
+                                <option value="" selected>Select One</option>
                                 <option value="Purchase">Purchase</option>
                                 <option value="Salary">Salary</option>
                             </select>
@@ -34,7 +34,7 @@
                     <br>
                     <br>
 
-                    <span class="float-right"><a class="btn btn-info" href="{{ route('collection.create') }}">Add
+                    <span class="float-right"><a class="btn btn-info" href="{{ route('expense.create') }}">Add
                             New</a></span>
                 </div>
 
@@ -60,12 +60,12 @@
                                 <td> {{ $loop->index+1 }}</td>
                                 <td> #E-{{ $expense->id }}</td>
                                 <td> {{ $expense->transaction_date }}</td>
-                                <td> {{ $collection->amount }}</td>
-                                <td> {{ $collection->month }}</td>
+                                <td> {{ $expense->amount }}</td>
+                                <td> {{ $expense->month }}</td>
                                 <td> {{ $expense->pay_to }}</td>
-                                <td> {{ $expense->member->name }}</td>
+                                <td> {{ $expense->member->full_name }}</td>
                                 <td> {{ $expense->bill_type }}</td>
-                                <td> {{ $collection->remarks }}</td>
+                                <td> {{ $expense->remarks }}</td>
                             </tr>
                             @endforeach
                         </tbody>

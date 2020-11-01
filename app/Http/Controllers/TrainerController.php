@@ -17,7 +17,7 @@ class TrainerController extends Controller
      */
     public function index()
     {
-        $trainers = Trainer::all();
+        $trainers = Trainer::with('department')->with('designation')->with('course')->get();
         return view('trainer.view', compact('trainers'));
     }
 
@@ -45,7 +45,23 @@ class TrainerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $img_name = uniqid() . ".jpg";
+
+        Trainer::create(array_merge($request->all(),['img_name' => $img_name]));
+        if ($request->webimg !== null) {
+            // got Webcam Image
+
+            $binary_data = base64_decode($request->webimg);
+            $result = file_put_contents('trainer_image/' . $img_name, $binary_data);
+        } else {
+
+            if ($request->hasFile('photo')) {
+                Image::make($request->file('photo'))->resize(250, 250)->save('trainer_image/' . $img_name);
+            } else {
+            }
+        }
+        return redirect()->route('trainer.index');
     }
 
     /**
@@ -67,7 +83,11 @@ class TrainerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $trainer = Trainer::findOrFail($id);
+        $departments = Department::all();
+        $designations = Designation::all();
+        $courses = Training::all();
+        return view('trainer.edit', compact('trainer','departments','designations','courses'));
     }
 
     /**
@@ -79,7 +99,23 @@ class TrainerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $trainer = Trainer::findOrFail($id);
+        $img_name = $trainer->photo;
+
+        $trainer->update(array_merge($request->all(), ['img_name' => $img_name]));
+        if ($request->webimg !== null) {
+            // got Webcam Image
+
+            $binary_data = base64_decode($request->webimg);
+            $result = file_put_contents('trainer_image/' . $img_name, $binary_data);
+        } else {
+
+            if ($request->hasFile('photo')) {
+                Image::make($request->file('photo'))->resize(250, 250)->save('trainer_image/' . $img_name);
+            } else {
+            }
+        }
+        return redirect()->route('trainer.index');
     }
 
     /**

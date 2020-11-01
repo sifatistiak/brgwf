@@ -33,15 +33,17 @@
                             @foreach ($trainers as $item)
                             <tr>
                                 <td> {{ $loop->index+1 }} </td>
+                                <td>
+                                    <img src="{{ asset('trainer_image/'.$item->photo) }}" style="width:90px" onerror="this.onerror=null;this.src='{{ asset('member_image/no_photo.png') }}';">
+                                </td>
                                 <td> {{ $item->name }} </td>
-                                <td> {{ $item->depatment->name }} </td>
+                                <td> {{ $item->department->name }} </td>
                                 <td> {{ $item->designation->name }} </td>
                                 <td> {{ $item->mobile }} </td>
                                 <td> {{ $item->email }} </td>
-                                <td> {{ $item->course_name }} </td>
+                                <td> {{ $item->course->name }} </td>
                                 <td class="d-flex justify-content-between">
-                                    <a href="{{ route('trainer.edit', $item->id) }}"
-                                        class="btn btn-outline-info">&#9998; Edit</a>
+                                    <a href="{{ route('trainer.edit', $item->id) }}" class="btn btn-outline-info">&#9998; Edit</a>
 
                                     {{ Form::open(['route' => ['trainer.destroy', $item->id], 'method' => 'delete']) }}
                                     <button class="btn btn-danger" type="submit">Delete</button>

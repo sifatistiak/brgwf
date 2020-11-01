@@ -347,27 +347,27 @@ return [
                 [
                     'text' => 'Member Info',
                     'icon' => 'fas fa-fw fa-info',
-                    'url'  => '#',
+                    'url'  => 'report-member',
                 ],
                 [
                     'text' => 'Training Info',
                     'icon' => 'fas fa-fw fa-info-circle',
-                    'url'  => '#',
+                    'url'  => 'report-training',
                 ],
                 [
                     'text' => 'Subscription History',
                     'icon' => 'fas fa-fw fa-map',
-                    'url'  => '#',
+                    'url'  => 'subscription-history',
                 ],
                 [
                     'text' => 'Training Wise Member',
                     'icon' => 'fas fa-fw fa-file-pdf',
-                    'url'  => '#',
+                    'url'  => 'training-member',
                 ],
                 [
                     'text' => 'Date Wise Collection info',
                     'icon' => 'fas fa-fw fa-table',
-                    'url'  => '#',
+                    'url'  => 'date-collection',
                 ],
             ]
         ],
