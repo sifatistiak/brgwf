@@ -14,23 +14,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Auth::routes(['register' => false]);
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes(['register' => false]);
+
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', function () {
     return view('home');
 })->name('home')->middleware('auth');
 
 Route::get('pages', function () {
     return view('welcome');
 })->middleware('auth');
+
+
+Route::group(['middleware' => ['auth']], function () {
 
 /**
  * -------------------------------------------------------------------------
@@ -110,3 +113,4 @@ Route::resource('religion', 'App\Http\Controllers\ReligionController');
 Route::resource('designation', 'App\Http\Controllers\DesignationController');
 Route::resource('category', 'App\Http\Controllers\CategoryController');
 Route::resource('department', 'App\Http\Controllers\DepartmentController');
+});
