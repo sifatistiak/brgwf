@@ -333,7 +333,7 @@ return [
                 [
                     'text' => 'SMS List',
                     'icon' => 'fas fa-fw fa-list',
-                    'url'  => '#',
+                    'url'  => 'sms',
                 ],
             ]
         ],

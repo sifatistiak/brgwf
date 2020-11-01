@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Models\Factory;
+use App\Models\Models\Member;
+use App\Models\Models\NonMember;
+use App\Models\Models\Trainer;
+use App\Models\Models\Training;
+use App\Models\Models\Union;
 use Illuminate\Http\Request;
 
-class TrainerMemberMapController extends Controller
+class TrainingMemberMapController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +29,13 @@ class TrainerMemberMapController extends Controller
      */
     public function create()
     {
-        //
+        $trainings = Training::all();
+        $unions = Union::all();
+        $factories = Factory::all();
+        $members = Member::all();
+        $nonmembers = NonMember::all();
+        $trainers = Trainer::all();
+        return view('training-assign.add', compact('trainings', 'unions', 'factories','members', 'trainers', 'nonmembers'));
     }
 
     /**

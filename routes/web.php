@@ -79,7 +79,8 @@ Route::resource('training-assign', 'App\Http\Controllers\TrainingMemberMapContro
  * SMS
  * -------------------------------------------------------------------------
  */
-
+Route::get('sms', 'App\Http\Controllers\SmsController@index')->name('sms.index');
+Route::post('sms', 'App\Http\Controllers\SmsController@store')->name('sms.store');
 /**
  * -------------------------------------------------------------------------
  * MIS Report
