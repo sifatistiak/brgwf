@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Models\Training;
+use App\Models\Models\TrainingMemberMap;
 use Illuminate\Http\Request;
 
 class TrainingController extends Controller
@@ -18,10 +19,15 @@ class TrainingController extends Controller
         return view('training.view', compact('trainings'));
     }
 
-    public function report()
+    public function report(Request $request)
     {
         $trainings = Training::orderBy('name')->get();
-        return view('training.report', compact('trainings'));
+        $training_member_maps = TrainingMemberMap::all();
+
+        if ($request->has('training') && $request->training !== null){
+            $training_member_maps = TrainingMemberMap::where('training_id', $request->training)->get();
+        }
+        return view('training.report', compact('trainings', 'training_member_maps'));
     }
 
     /**

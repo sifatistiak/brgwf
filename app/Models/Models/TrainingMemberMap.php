@@ -10,4 +10,16 @@ class TrainingMemberMap extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function training(){
+        return $this->belongsTo(Training::class);
+    }
+
+    // public function member(){
+    //     return $this->belongsTo(Member::class);
+    // }
+
+    public function trainer(){
+        return $this->belongsTo(Trainer::class);
+    }
 }

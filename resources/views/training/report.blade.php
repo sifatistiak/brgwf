@@ -10,6 +10,21 @@
                 <div class="box-header">
                     <h3 class="box-title">Training List</h3>
                     <hr>
+                    <form action="{{ route('tr-report.filter') }}" method="post">
+                        @csrf
+                        <div class="row" style="display: flex; justify-content: center;">
+
+                            <label for="training">Training Name</label>
+                            <select class="mx-2" name="training" id="training">
+                                <option value="" selected>Select One</option>
+                                @foreach ($trainings as $training)
+                                <option value="{{ $training->id }}"> {{ $training->name }}</option>
+                                @endforeach
+                            </select>
+
+                            <button type="submit" class="ml-4 btn btn-primary">Filter</button>
+                        </div>
+                    </form>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -17,26 +32,24 @@
                         <thead>
                             <tr>
                                 <th>Sl</th>
-                                <th>Name</th>
-                                <th>Code</th>
+                                <th>Training</th>
+                                <th>Member Name</th>
+                                <th>Trainer</th>
+                                <th>Training Date</th>
                                 <th>Duration</th>
-                                <th>Active</th>
+                                <th>Center Name</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($trainings as $item)
+                            @foreach ($training_member_maps as $item)
                             <tr>
                                 <td> {{ $loop->index+1 }} </td>
-                                <td> {{ $item->name }} </td>
-                                <td> {{ $item->code }} </td>
-                                <td> {{ $item->duration }} </td>
-                                <td>
-                                    @if ($item->is_active)
-                                    <span class="badge bg-success">Active</span>
-                                    @else
-                                    <span class="badge bg-danger">Inactive</span>
-                                    @endif
-                                </td>
+                                <td> {{ $item->training->name }} </td>
+                                <td> {{ $item->member_name }} </td>
+                                <td> {{ $item->trainer->name }} </td>
+                                <td> {{ date('d/m/Y',strtotime($item->training_date)) }} </td>
+                                <td> {{ $item->training->duration }} </td>
+                                <td> {{ $item->center }} </td>
                             </tr>
 
                             @endforeach

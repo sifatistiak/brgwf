@@ -11,25 +11,7 @@
                 <div class="box-header">
                     <h3 class="box-title">লেনদেন তালিকা</h3>
                     <hr>
-                    <form action="" method="post">
-                        @csrf
-                        <div class="row" style="display: flex; justify-content: center;">
-
-                            <label for="bill_type">Account</label>
-                            <select class="mx-2" name="bill_type" id="bill_type">
-                                <option value="" selected>Select One</option>
-                                <option value="Subscription Fee">Subscription Fee</option>
-                                <option value="Others">Others</option>
-                            </select>
-
-                            <label for="from_date">Select Date From</label>
-                            <input class="mx-2" type="date" name="from_date" id="from_date">
-                            <label for="to_date">To</label>
-                            <input class="mx-2" type="date" name="to_date" id="to_date">
-
-                            <button type="submit" class="ml-4 btn btn-primary">Filter</button>
-                        </div>
-                    </form>
+                   
 
                     <br>
                     <br>
