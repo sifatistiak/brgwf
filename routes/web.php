@@ -101,7 +101,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('subscription-history', 'App\Http\Controllers\AccountController@index');
     Route::get('training-member', 'App\Http\Controllers\TrainingController@report');
     Route::post('training-member-filter', 'App\Http\Controllers\TrainingController@filter');
-    Route::get('date-collection', 'App\Http\Controllers\AccountController@collection');
+    Route::get('due-collection', 'App\Http\Controllers\AccountController@dueCollection');
+    Route::post('due-collection', 'App\Http\Controllers\AccountController@dueCollection')->name('due.filter');
 
     /**
      * -------------------------------------------------------------------------

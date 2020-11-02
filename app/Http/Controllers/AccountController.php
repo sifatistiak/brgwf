@@ -53,7 +53,6 @@ class AccountController extends Controller
         }
 
         return view('account.collection-view', compact('collections', 'members'));
-
     }
 
 
@@ -104,7 +103,7 @@ class AccountController extends Controller
 
         if ($request->from_date !== null || $request->to_date !== null) {
             $expenses = Expense::where('transaction_date', '>=', $request->from_date  ?? date('Y-m-d'))
-            ->where('transaction_date', '<=', $request->to_date ?? date('Y-m-d'))->get();
+                ->where('transaction_date', '<=', $request->to_date ?? date('Y-m-d'))->get();
         }
 
         return view('account.expense-view', compact('expenses'));
@@ -115,5 +114,21 @@ class AccountController extends Controller
         $collections = Collection::all();
 
         return view('account.subscription', compact('collections'));
+    }
+
+    public function dueCollection(Request $request)
+    {
+        $m = date('m');
+        $year = date('Y');
+        
+        if ($request->has('filter')) {
+            $m = date('m',strtotime($request->filter));
+            $year = date('Y',strtotime($request->filter));
+        }
+
+        $collections = Collection::all();
+        $members = Member::where('is_active', 1)->get();
+
+        return view('account.due', compact('collections', 'members', 'm', 'year'));
     }
 }

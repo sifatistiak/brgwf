@@ -46,7 +46,7 @@ class MemberController extends Controller
      */
     public function create()
     {
-        $unions = Union::where('is_active', 1)->orderBy('name','ASC')->get();
+        $unions = Union::where('is_active', 1)->orderBy('name', 'ASC')->get();
         $factories = Factory::where('is_active', 1)->orderBy('name', 'ASC')->get();
         $member_categories = Category::where('status', 1)->orderBy('name', 'ASC')->get();
         $educations = Education::where('status', 1)->orderBy('name', 'ASC')->get();
@@ -66,7 +66,7 @@ class MemberController extends Controller
     {
         // return $request->all();
         $full_name = $request->firstname . " " . $request->lastname;
-        $membership_no = substr(time(), 1) . rand(0, 9);
+        $membership_no = substr(time(), 1, -1) . rand(0, 9);
 
         $img_name = uniqid() . ".jpg";
 
@@ -183,28 +183,28 @@ class MemberController extends Controller
         $members = Member::where('is_active', 1)->with('religion')->with('union')->paginate(100);
 
 
-        if($request->box_value !== null){
+        if ($request->box_value !== null) {
             $members = Member::where('is_active', $request->is_active ?? 0)
-            ->where($request->box_type, $request->box_value)
-            ->with('religion')->with('union')
-            ->orderBy($request->box_type, $request->sort)
-             ->paginate(100);
+                ->where($request->box_type, $request->box_value)
+                ->with('religion')->with('union')
+                ->orderBy($request->box_type, $request->sort)
+                ->paginate(100);
         }
 
-        if($request->union !== null){
+        if ($request->union !== null) {
             $members = Member::where('is_active', $request->is_active ?? 0)
-            ->where('union_id', $request->union)
-            ->with('religion')->with('union')
-            ->orderBy('union_id', $request->sort)
-            ->paginate(100);
+                ->where('union_id', $request->union)
+                ->with('religion')->with('union')
+                ->orderBy('union_id', $request->sort)
+                ->paginate(100);
         }
 
-        if($request->factory !== null){
+        if ($request->factory !== null) {
             $members = Member::where('is_active', $request->is_active ?? 0)
-            ->where('factory_id', $request->factory)
-            ->with('religion')->with('union')
-            ->orderBy('factory_id', $request->sort)
-            ->paginate(100);
+                ->where('factory_id', $request->factory)
+                ->with('religion')->with('union')
+                ->orderBy('factory_id', $request->sort)
+                ->paginate(100);
         }
 
 
@@ -333,6 +333,6 @@ class MemberController extends Controller
         }
 
 
-        return view('member.view-non-member', compact('members', 'factories','categories'));
+        return view('member.view-non-member', compact('members', 'factories', 'categories'));
     }
 }

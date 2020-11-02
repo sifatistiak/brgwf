@@ -365,9 +365,9 @@ return [
                     'url'  => 'training-member',
                 ],
                 [
-                    'text' => 'Date Wise Collection info',
+                    'text' => 'Due Collection',
                     'icon' => 'fas fa-fw fa-table',
-                    'url'  => 'date-collection',
+                    'url'  => 'due-collection',
                 ],
             ]
         ],
