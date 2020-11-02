@@ -72,14 +72,13 @@
         'info': true,
         'autoWidth': true,
         buttons: [{
-                extend: 'csvHtml5'
+                extend: 'csvHtml5',
+                "charset": "utf-8"
 
             },
             {
-                extend: 'excelHtml5'
-            },
-            {
-                extend: 'pdfHtml5'
+                extend: 'excelHtml5',
+                "charset": "utf-8"
             }
         ]
     })
