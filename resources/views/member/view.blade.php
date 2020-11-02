@@ -10,6 +10,8 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Member Lists</h3>
+                    <a style="float: right" class="btn btn-primary pull-right" href="{{ route('export.members') }}"> Export To Excel </a>
+                    <br>
                     <hr>
                     <form action="{{ route('member.filter') }}" method="post">
                         @csrf

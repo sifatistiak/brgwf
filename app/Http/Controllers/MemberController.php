@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MembersExport;
 use App\Models\Models\Category;
 use App\Models\Models\Designation;
 use App\Models\Models\Education;
@@ -16,6 +17,8 @@ use DataTables;
 
 use Image;
 
+use Maatwebsite\Excel\Facades\Excel;
+
 class MemberController extends Controller
 {
     /**
@@ -29,6 +32,11 @@ class MemberController extends Controller
         $factories = Factory::where('is_active', 1)->get();
         $members = Member::where('is_active', 1)->with('religion')->with('union')->paginate(100);
         return view('member.view', compact('members', 'unions', 'factories'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new MembersExport, 'members.xlsx');
     }
 
     /**
