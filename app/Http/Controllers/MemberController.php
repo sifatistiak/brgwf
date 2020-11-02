@@ -105,7 +105,9 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        //
+        $member = Member::where('id', $id)->with('religion')->with('union')->with('factory')->first();
+
+        return view('member.show', compact('member'));
     }
 
     /**

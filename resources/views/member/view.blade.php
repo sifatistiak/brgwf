@@ -121,6 +121,7 @@
                                 </td>
                                 <td class="d-flex justify-content-between">
                                     <a href="{{ route('member.edit', $member->id) }}" class="btn btn-outline-info">&#9998; Edit</a>
+                                    <a href="{{ route('member.show', $member->id) }}" class="btn btn-outline-dark"><i class="far fa-eye"></i> View</a>
                                     <a href="{{ route('training-assign.create') }}">Training</a>
                                 </td>
                             </tr>
