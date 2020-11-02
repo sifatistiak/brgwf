@@ -38,11 +38,11 @@ class MemberController extends Controller
      */
     public function create()
     {
-        $unions = Union::where('is_active', 1)->get();
-        $factories = Factory::where('is_active', 1)->get();
-        $member_categories = Category::where('status', 1)->get();
-        $educations = Education::where('status', 1)->get();
-        $designations = Designation::where('status', 1)->get();
+        $unions = Union::where('is_active', 1)->orderBy('name','ASC')->get();
+        $factories = Factory::where('is_active', 1)->orderBy('name', 'ASC')->get();
+        $member_categories = Category::where('status', 1)->orderBy('name', 'ASC')->get();
+        $educations = Education::where('status', 1)->orderBy('name', 'ASC')->get();
+        $designations = Designation::where('status', 1)->orderBy('name', 'ASC')->get();
         $religions = Religion::where('status', 1)->get();
 
         return view('member.add', compact('unions', 'factories', 'member_categories', 'educations', 'designations', 'religions'));

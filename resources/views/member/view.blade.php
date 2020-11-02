@@ -9,7 +9,7 @@
 
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Memeber Lists</h3>
+                    <h3 class="box-title">Member Lists</h3>
                     <hr>
                     <form action="{{ route('member.filter') }}" method="post">
                         @csrf
@@ -42,8 +42,7 @@
                                 <option value="ASC" selected>ASC</option>
                                 <option value="DESC">DESC</option>
                             </select>
-                            <input class="minimal" type="checkbox" name="is_active" id="is_active" value="1" checked
-                                style="margin-top: 7px; margin-right: 5px; margin-left: 20px;">
+                            <input class="minimal" type="checkbox" name="is_active" id="is_active" value="1" checked style="margin-top: 7px; margin-right: 5px; margin-left: 20px;">
                             <label for="is_active">Is Active</label>
                             <button type="submit" class="ml-4 btn btn-primary">Filter</button>
                         </div>
@@ -77,7 +76,12 @@
                                     Gender
                                 </th>
                                 <th>
-                                    Union
+                                    Mobile <br>
+                                    Blood Group
+                                </th>
+                                <th>
+                                    Union <br>
+                                    Factory
                                 </th>
                                 <th>
                                     Action
@@ -88,13 +92,12 @@
                             @foreach ($members as $member)
                             <tr>
                                 <td>
-                                    <img src="{{ asset('member_image/'.$member->photo) }}" style="width:90px"
-                                        onerror="this.onerror=null;this.src='{{ asset('member_image/no_photo.png') }}';">
+                                    <img src="{{ asset('member_image/'.$member->photo) }}" style="width:90px" onerror="this.onerror=null;this.src='{{ asset('member_image/no_photo.png') }}';">
                                 </td>
                                 <td>
-                                     {{ $member->membership_no }} <br>
-                                     {{ $member->nid }} <br>
-                                     {{ $member->reg_no }}
+                                    {{ $member->membership_no }} <br>
+                                    {{ $member->nid }} <br>
+                                    {{ $member->reg_no }}
                                 </td>
                                 <td>
                                     {{ $member->full_name }} <br>
@@ -107,7 +110,12 @@
                                     {{ $member->gender }}
                                 </td>
                                 <td>
-                                    {{ $member->union->name ?? 'N/A' }}
+                                    {{ $member->mobile ?? 'N/A' }} <br>
+                                    {{ $member->blood_group ?? 'N/A' }}
+                                </td>
+                                <td>
+                                    {{ $member->union->name ?? 'N/A' }} <br>
+                                    {{ $member->factory->name ?? 'N/A' }}
                                 </td>
                                 <td class="d-flex justify-content-between">
                                     <a href="{{ route('member.edit', $member->id) }}" class="btn btn-outline-info">&#9998; Edit</a>
@@ -127,12 +135,32 @@
 @section('js')
 <script>
     $('#example1').DataTable({
+        dom: 'Bfrtip',
         'paging': true,
         'lengthChange': true,
         'searching': true,
         'ordering': true,
         'info': true,
-        'autoWidth': true
+        'autoWidth': true,
+        buttons: [{
+                extend: 'csvHtml5',
+                exportOptions: {
+                    columns: [1, 2, 3, 4, 5]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: [1, 2, 3, 4, 5]
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: [1, 2, 3, 4, 5]
+                }
+            }
+        ]
     })
 </script>
 @stop

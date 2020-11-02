@@ -296,6 +296,10 @@
     $('#takesnap').hide();
     $('#close').hide();
 
+    $('#union_id').select2();
+    $('#factory_id').select2();
+    $('#designation_id').select2();
+
     function readURL(input) {
         if (input.files && input.files[0]) {
             document.getElementById('webimg').value = '';
