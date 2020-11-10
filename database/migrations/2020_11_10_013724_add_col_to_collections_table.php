@@ -14,7 +14,7 @@ class AddColToCollectionsTable extends Migration
     public function up()
     {
         Schema::table('collections', function (Blueprint $table) {
-            $table->dropColumnIfExists('month');
+            $table->dropColumn('month');
             $table->date('from_date')->useCurrent()->nullable()->after('bill_type');
             $table->date('to_date')->useCurrent()->nullable()->after('from_date');
         });
