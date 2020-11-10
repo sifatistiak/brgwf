@@ -113,7 +113,7 @@ class AccountController extends Controller
     public function index()
     {
         $collections = Collection::all();
-        $members = Member::where('is_active', 1)->get();
+        $members = Member::all();
 
         return view('account.subscription', compact('collections', 'members'));
     }

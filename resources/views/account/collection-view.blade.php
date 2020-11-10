@@ -13,34 +13,34 @@
                     <div class="box-header">
                         <h3 class="box-title">Collection List</h3>
                         <hr>
-                            @csrf
-                            <div class="row" style="display: flex; justify-content: center;">
+                        @csrf
+                        <div class="row" style="display: flex; justify-content: center;">
 
-                                {{-- <label for="bill_type">Account</label>
-                                <select class="mx-2" name="bill_type" id="bill_type">
-                                    <option value="" selected>Select One</option>
-                                    <option value="Subscription Fee">Subscription Fee</option>
-                                    <option value="Others">Others</option>
-                                </select> --}}
+                            {{-- <label for="bill_type">Account</label>
+                            <select class="mx-2" name="bill_type" id="bill_type">
+                                <option value="" selected>Select One</option>
+                                <option value="Subscription Fee">Subscription Fee</option>
+                                <option value="Others">Others</option>
+                            </select> --}}
 
-                                <label for="from_date">Select Date From</label>
-                                <input class="mx-2" type="text" name="from_date" id="from_date" autocomplete="off">
-                                <label for="to_date">To</label>
-                                <input class="mx-2" type="text" name="to_date" id="to_date" autocomplete="off">
-                            </div>
+                            <label for="from_date">Select Date From</label>
+                            <input class="mx-2" type="text" name="from_date" id="from_date" autocomplete="off">
+                            <label for="to_date">To</label>
+                            <input class="mx-2" type="text" name="to_date" id="to_date" autocomplete="off">
+                        </div>
 
 
-                                <div class="row mt-3" style="display: flex; justify-content: center;">
-                                    <label class="mr-4">Member</label>
-                                    <div id="member"></div>
-                                    <div id="member2"></div>
-                                </div>
-                                {{-- <select class="mx-2" name="member" id="member">
-                                    <option value="">Select One</option>
-                                    @foreach ($members as $member)
-                                        <option value="{{ $member->id }}">{{ $member->full_name }}</option>
-                                    @endforeach
-                                </select> --}}
+                        <div class="row mt-3" style="display: flex; justify-content: center;">
+                            <label class="mr-4">Member</label>
+                            <div id="member"></div>
+                            <div id="member2"></div>
+                        </div>
+                        {{-- <select class="mx-2" name="member" id="member">
+                            <option value="">Select One</option>
+                            @foreach ($members as $member)
+                                <option value="{{ $member->id }}">{{ $member->full_name }}</option>
+                            @endforeach
+                        </select> --}}
 
                         <br>
                         <br>
@@ -95,7 +95,7 @@
         integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
         crossorigin="anonymous"></script>
 
-        <script>
+    <script>
         $.fn.datepicker.defaults.format = "dd-M-yyyy";
         $('#example').DataTable({
             'paging': true,
@@ -149,51 +149,52 @@
         });
         // var table = $('#example1').DataTable();
 
+
+
+        var table = $('#example1').DataTable({
+            initComplete: function() {
+                this.api().columns([1]).every(function() {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo($('#member'))
+                        .on('change', function() {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+
+                    column.data().unique().sort().each(function(d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                });
+                this.api().columns([2]).every(function() {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo($('#member2'))
+                        .on('change', function() {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+
+                    column.data().unique().sort().each(function(d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                });
+            }
+        });
         // Event listener to the two range filtering inputs to redraw on input
         $('#from_date, #to_date').change(function() {
             table.draw();
         });
-
-        $('#example1').DataTable( {
-        initComplete: function () {
-            this.api().columns([1]).every( function () {
-                var column = this;
-                var select = $('<select><option value=""></option></select>')
-                    .appendTo( $('#member') )
-                    .on( 'change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
-                        );
-
-                        column
-                            .search( val ? '^'+val+'$' : '', true, false )
-                            .draw();
-                    } );
-
-                column.data().unique().sort().each( function ( d, j ) {
-                    select.append( '<option value="'+d+'">'+d+'</option>' )
-                } );
-            } );
-            this.api().columns([2]).every( function () {
-                var column = this;
-                var select = $('<select><option value=""></option></select>')
-                    .appendTo( $('#member2') )
-                    .on( 'change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
-                        );
-
-                        column
-                            .search( val ? '^'+val+'$' : '', true, false )
-                            .draw();
-                    } );
-
-                column.data().unique().sort().each( function ( d, j ) {
-                    select.append( '<option value="'+d+'">'+d+'</option>' )
-                } );
-            } );
-        }
-    } );
         $('#member>select , #member2>select').select2();
 
     </script>
