@@ -21,14 +21,13 @@ class AccountController extends Controller
     {
         $members = Member::where('is_active', 1)->get();
 
-        return view('account.collection-add',compact('members'));
+        return view('account.collection-add', compact('members'));
     }
 
     public function collectionStore(Request $request)
     {
         // return $request->all();
-        $month = $request->month . "-01";
-        Collection::create(array_merge($request->all(), ['month' => $month]));
+        Collection::create($request->all());
 
         session()->flash('status', "Created Successfully");
         return redirect()->back();
@@ -114,24 +113,21 @@ class AccountController extends Controller
     public function index()
     {
         $collections = Collection::all();
-        $members = Member::where('is_active',1)->get();
-
-        return view('account.subscription', compact('collections','members'));
-    }
-
-    public function dueCollection(Request $request)
-    {
-        $m = date('m');
-        $year = date('Y');
-
-        if ($request->has('filter')) {
-            $m = date('m',strtotime($request->filter));
-            $year = date('Y',strtotime($request->filter));
-        }
-
-        $collections = Collection::all();
         $members = Member::where('is_active', 1)->get();
 
-        return view('account.due', compact('collections', 'members', 'm', 'year'));
+        return view('account.subscription', compact('collections', 'members'));
+    }
+
+    public function dueCollection()
+    {
+
+        $members = Member::where('is_active', 1)->with(['collection' => function ($q) {
+            $q->where('to_date', '<', date('Y-m-d'))->latest();
+        }])
+        ->paginate(100);
+
+        // return $members; ->doesntHave('collection')
+
+        return view('account.due', compact('members'));
     }
 }

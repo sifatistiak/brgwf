@@ -23,4 +23,8 @@ class Member extends Model
     public function factory(){
         return $this->belongsTo(Factory::class);
     }
+
+    public function collection(){
+        return $this->hasMany(Collection::class,'membership_id','membership_no');
+    }
 }
