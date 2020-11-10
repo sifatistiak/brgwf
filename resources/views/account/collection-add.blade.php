@@ -19,8 +19,13 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <label class="col-md-2" for="membership_id">Membership No</label>
-                                        <input type="text" class="form-control input-group col-md-3" id="membership_id"
-                                            name="membership_id">
+                                        <select class="form-control input-group col-md-3" name="membership_id" id="membership_id">
+                                            <option value="">Select Member</option>
+                                            @foreach($members as $key => $value)
+                                                <option value="{{ $value->membership_no }}">{{ $value->membership_no }} / {{ $value->full_name }}</option>
+                                            @endforeach
+                                        </select>
+
                                         <span class="input-group-addon col-md-1"></span>
                                         <label class="col-md-2" for="trans_date">Trans Date</label>
                                         <input type="date" class="form-control input-group col-md-3"
@@ -58,7 +63,8 @@
                                     <thead>
                                         <tr>
                                             <td>Bill/Fees Head Name</td>
-                                            <td>Month</td>
+                                            <td>From Date</td>
+                                            <td>To Date</td>
                                             <td>Amount</td>
                                             <td>Action</td>
                                         </tr>
@@ -72,11 +78,14 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <input type="month" name="month" id="month">
+                                                <input type="date" name="from_date" id="from_date" required>
+                                            </td>
+                                            <td>
+                                                <input type="date" name="to_date" id="to_date" required>
                                             </td>
 
                                             <td>
-                                                <input type="number" name="amount" id="amount" value="0" min="0">
+                                                <input type="number" name="amount" id="amount" value="0" min="0" required>
                                             </td>
                                             <td>
                                                 <button type="submit" disabled style="display: none" aria-hidden="true"></button>
@@ -98,15 +107,16 @@
 @section('js')
 
 <script>
-$("#membership_id").on("keydown",function search(e) {
-    if(e.keyCode == 13) {
+    $('#membership_id').select2({
+        'placeholder':'Select Member'
+    });
+$("#membership_id").on("change",function search(e) {
         var id = $(this).val();
         $.get( "/collection-ajax/"+id, function( data ) {
             console.log(data);
             $('#name').val(data.full_name);
             $('#ref_name').val(data.type);
         });
-    }
 });
 </script>
 @stop

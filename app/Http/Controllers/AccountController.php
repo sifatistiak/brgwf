@@ -19,7 +19,9 @@ class AccountController extends Controller
 
     public function collectionCreate()
     {
-        return view('account.collection-add');
+        $members = Member::where('is_active', 1)->get();
+
+        return view('account.collection-add',compact('members'));
     }
 
     public function collectionStore(Request $request)
@@ -112,8 +114,9 @@ class AccountController extends Controller
     public function index()
     {
         $collections = Collection::all();
+        $members = Member::where('is_active',1)->get();
 
-        return view('account.subscription', compact('collections'));
+        return view('account.subscription', compact('collections','members'));
     }
 
     public function dueCollection(Request $request)
