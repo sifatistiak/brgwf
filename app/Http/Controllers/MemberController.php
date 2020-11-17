@@ -30,7 +30,7 @@ class MemberController extends Controller
     {
         $unions = Union::where('is_active', 1)->get();
         $factories = Factory::where('is_active', 1)->get();
-        $members = Member::where('is_active', 1)->with('religion')->with('union')->paginate(100);
+        $members = Member::where('is_active', 1)->orderBy('id', 'DESC')->with('religion')->with('union')->paginate(100);
         return view('member.view', compact('members', 'unions', 'factories'));
     }
 

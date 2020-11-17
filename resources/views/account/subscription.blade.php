@@ -40,6 +40,7 @@
                                         <option value="{{ $member->id }}">{{ $member->full_name }}</option>
                     @endforeach
                     </select> --}}
+                    {{-- <button class="btn btn-outline-dark" onclick="printDiv()">Print</button> --}}
 
                     <br>
                     <br>
@@ -49,7 +50,7 @@
                 </div>
 
                 <!-- /.box-header -->
-                <div class="box-body">
+                <div class="box-body" id="table-print">
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -88,6 +89,17 @@
 </section>
 @stop
 @section('js')
+<script>
+    function printDiv() {
+        var prtContent = document.getElementById("table-print");
+        var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(prtContent.innerHTML);
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.close();
+    }
+</script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
@@ -186,7 +198,9 @@
                     select.append('<option value="' + d + '">' + d + '</option>')
                 });
             });
-        }
+        },
+          dom: 'Blfrtip',
+          buttons: [ 'csv', 'excel', 'pdf', 'print' ]
     });
     $('#from_date, #to_date').change(function() {
         table.draw();

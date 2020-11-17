@@ -10,6 +10,11 @@
 </style>
 <section class="content">
     <div class="row">
+        <div style="margin-left: 90%;">
+            <button type="button" onclick="window.print()" class="btn btn-sm btn-outline-primary"> <i class="fas fa-print"></i> Print</button>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-12 text-center">
             <h3>Bangladesh Revolutionary Garment Workers Federation - BRGWF</h3>
             <h6>55, Ruhani Complex (1st Floor), Zoo Road, Mirpur -2, Dhaka -1216</h6>
@@ -34,12 +39,48 @@
                 <td>{{ $member->father_name }}</td>
             </tr>
             <tr>
+                <td>Mother Name</td>
+                <td>{{ $member->mother_name }}</td>
+            </tr>
+            <tr>
+                <td>Spouse Name</td>
+                <td>{{ $member->spouse_name }}</td>
+            </tr>
+            <tr>
                 <td>Gender</td>
                 <td>{{ $member->gender }}</td>
             </tr>
             <tr>
                 <td>Date Of Birth</td>
                 <td>{{ $member->date_of_birth }}</td>
+            </tr>
+            <tr>
+                <td>Blood Group</td>
+                <td>{{ $member->blood_group }}</td>
+            </tr>
+            <tr>
+                <td>Religion</td>
+                <td>{{ $member->religion }}</td>
+            </tr>
+            <tr>
+                <td>Education</td>
+                <td>{{ $member->education }}</td>
+            </tr>
+            <tr>
+                <td>NID</td>
+                <td>{{ $member->nid }}</td>
+            </tr>
+            <tr>
+                <td>Designation</td>
+                <td>{{ $member->designation->name ?? 'N/A' }}</td>
+            </tr>
+            <tr>
+                <td>Categories</td>
+                <td>{{ $member->category->name ?? 'N/A' }}</td>
+            </tr>
+             <tr>
+                <td>Reg No</td>
+                <td>{{ $member->reg_no }}</td>
             </tr>
             <tr>
                 <td>Joining Date</td>
