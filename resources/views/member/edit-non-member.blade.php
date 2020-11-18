@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'BRGWF Non MemberShip')
+@section('title', env('Site_Title', 'BRGWF').'Non MemberShip')
 
 @section('content')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.swf">
@@ -12,8 +12,7 @@
                     <p class="mb-0">Non Membership Edit</p>
                 </div>
                 <div class="card-body">
-                    <form class="form-horizontal" action="{{ route('non-member.update',$member->id) }}"
-                        enctype="multipart/form-data" method="post">
+                    <form class="form-horizontal" action="{{ route('non-member.update',$member->id) }}" enctype="multipart/form-data" method="post">
                         @method('PUT')
                         @csrf
                         <div class="row">
@@ -26,8 +25,7 @@
                                         <select class="form-control" id="factory_id" name="factory_id">
                                             <option value="">Select One</option>
                                             @foreach ($factories as $factory)
-                                            <option value="{{ $factory->id }}"
-                                                {{ ($factory->id == $member->factory_id) ? 'selected' : '' }}>
+                                            <option value="{{ $factory->id }}" {{ ($factory->id == $member->factory_id) ? 'selected' : '' }}>
                                                 {{ $factory->name }}</option>
                                             @endforeach
                                         </select>
@@ -38,8 +36,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="full_name">Name</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="full_name" name="full_name" required="required"
-                                            type="text" value="{{ $member->full_name }}">
+                                        <input class="form-control" id="full_name" name="full_name" required="required" type="text" value="{{ $member->full_name }}">
                                     </div>
                                 </div>
 
@@ -50,8 +47,7 @@
                                         <select class="form-control" id="gender" name="gender">
                                             <option value="Male" {{ ($member->gender == "Male") ? "selected" : "" }}>
                                                 Male</option>
-                                            <option value="Female"
-                                                {{ ($member->gender == "Female") ? "selected" : "" }}>Female</option>
+                                            <option value="Female" {{ ($member->gender == "Female") ? "selected" : "" }}>Female</option>
                                             <option value="Other" {{ ($member->gender == "Other") ? "selected" : "" }}>
                                                 Other</option>
                                         </select>
@@ -62,8 +58,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="date_of_birth">Date Of Birth</label>
                                     <div class="col-md-9">
-                                        <input class="form-control datepicker" id="date_of_birth" name="date_of_birth"
-                                            type="date" value="{{ $member->date_of_birth }}">
+                                        <input class="form-control datepicker" id="date_of_birth" name="date_of_birth" type="date" value="{{ $member->date_of_birth }}">
                                     </div>
                                 </div>
 
@@ -72,8 +67,7 @@
                                     <div class="col-md-9">
                                         <select class="form-control" id="religion_id" name="religion_id">
                                             @foreach ($religions as $religion)
-                                            <option value="{{ $religion->id }}"
-                                                {{ ($religion->id == $member->religion_id)?"selected":'' }}>
+                                            <option value="{{ $religion->id }}" {{ ($religion->id == $member->religion_id)?"selected":'' }}>
                                                 {{ $religion->name }}</option>
                                             @endforeach
                                         </select>
@@ -108,16 +102,14 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="father_name">Father Name</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="father_name" name="father_name" type="text"
-                                            value="{{ $member->father_name }}">
+                                        <input class="form-control" id="father_name" name="father_name" type="text" value="{{ $member->father_name }}">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="mother_name">Mother Name</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="mother_name" name="mother_name" type="text"
-                                            value="{{ $member->mother_name }}">
+                                        <input class="form-control" id="mother_name" name="mother_name" type="text" value="{{ $member->mother_name }}">
                                     </div>
                                 </div>
 
@@ -127,8 +119,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="spouse_name">Spouse Name</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="spouse_name" name="spouse_name" type="text"
-                                            value="{{ $member->spouse_name }}">
+                                        <input class="form-control" id="spouse_name" name="spouse_name" type="text" value="{{ $member->spouse_name }}">
 
                                     </div>
                                 </div>
@@ -139,18 +130,15 @@
 
                                 <div class="input-group input-group-sm">
                                     <label class="control-label col-md-12" for="photo">Photo</label>
-                                    <input accept="image/*" class="form-control col-md-5" id="photo" name="photo"
-                                        onchange="readURL(this);" type="file" style="height:auto;">
+                                    <input accept="image/*" class="form-control col-md-5" id="photo" name="photo" onchange="readURL(this);" type="file" style="height:auto;">
                                     <span class="input-group-btn">
-                                        <a id="webcam" class="form-control btn btn-success" onclick="showCamera();"> <i
-                                                class="fa fa-camera"> &nbsp; Use Camera</i> </a>
+                                        <a id="webcam" class="form-control btn btn-success" onclick="showCamera();"> <i class="fa fa-camera"> &nbsp; Use Camera</i> </a>
                                     </span>
 
                                 </div>
 
 
-                                <img id="blah" class="img-thumbnail" src="{{ asset('member_image/'.$member->photo) }}"
-                                    style="float:left; width:250px; height:200px; margin-right:10px; margin-top: 25px;">
+                                <img id="blah" class="img-thumbnail" src="{{ asset('member_image/'.$member->photo) }}" style="float:left; width:250px; height:200px; margin-right:10px; margin-top: 25px;">
 
 
                                 <div class="row col-md-6">
@@ -187,8 +175,7 @@
                                         <select class="form-control" id="designation_id" name="designation_id">
                                             <option value="">Select One</option>
                                             @foreach ($designations as $designation)
-                                            <option value="{{ $designation->id }}"
-                                                {{ ($designation->id == $member->designation_id)?"selected":'' }}>
+                                            <option value="{{ $designation->id }}" {{ ($designation->id == $member->designation_id)?"selected":'' }}>
                                                 {{ $designation->name }}</option>
                                             @endforeach
 
@@ -203,8 +190,7 @@
                                         <select class="form-control" id="category_id" name="category_id">
                                             <option value="">Select One</option>
                                             @foreach ($member_categories as $category)
-                                            <option value="{{ $category->id }}"
-                                                {{ ($category->id == $member->category_id)?"selected":'' }}>
+                                            <option value="{{ $category->id }}" {{ ($category->id == $member->category_id)?"selected":'' }}>
                                                 {{ $category->name }}</option>
                                             @endforeach
                                         </select>
@@ -215,16 +201,14 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="joining_date">Joining Date</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="joining_date" name="joining_date" type="date"
-                                            value="{{ $member->joining_date }}">
+                                        <input class="form-control" id="joining_date" name="joining_date" type="date" value="{{ $member->joining_date }}">
                                     </div>
                                 </div>
 
 
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="is_paid">
-                                        <input id="is_paid" name="is_paid" type="checkbox" class="minimal" value="1"
-                                            {{ ($member->is_paid == 1) ? 'checked' : ''}}>
+                                        <input id="is_paid" name="is_paid" type="checkbox" class="minimal" value="1" {{ ($member->is_paid == 1) ? 'checked' : ''}}>
                                         Is Paid
                                     </label>
                                 </div>
@@ -234,24 +218,21 @@
                         <div class="form-group">
                             <label class="control-label col-md-2" for="present_address">Present Address</label>
                             <div class="col-md-8">
-                                <textarea class="form-control" cols="20" id="present_address" name="present_address"
-                                    rows="3">{{ $member->present_address }}</textarea>
+                                <textarea class="form-control" cols="20" id="present_address" name="present_address" rows="3">{{ $member->present_address }}</textarea>
 
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2" for="permanent_address">Permanent Address</label>
                             <div class="col-md-8">
-                                <textarea class="form-control" cols="20" id="permanent_address" name="permanent_address"
-                                    rows="3">{{ $member->permanent_address }}</textarea>
+                                <textarea class="form-control" cols="20" id="permanent_address" name="permanent_address" rows="3">{{ $member->permanent_address }}</textarea>
 
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label col-md-2" for="is_active">
-                                <input id="is_active" name="is_active" value="1" type="checkbox" class="minimal"
-                                    {{ ($member->is_active == 1) ? 'checked' : ''}}>
+                                <input id="is_active" name="is_active" value="1" type="checkbox" class="minimal" {{ ($member->is_active == 1) ? 'checked' : ''}}>
                                 Is Active
                             </label>
                         </div>
@@ -267,9 +248,7 @@
 </section>
 @stop
 @section('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.js"
-    integrity="sha512-AQMSn1qO6KN85GOfvH6BWJk46LhlvepblftLHzAv1cdIyTWPBKHX+r+NOXVVw6+XQpeW4LJk/GTmoP48FLvblQ=="
-    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.js" integrity="sha512-AQMSn1qO6KN85GOfvH6BWJk46LhlvepblftLHzAv1cdIyTWPBKHX+r+NOXVVw6+XQpeW4LJk/GTmoP48FLvblQ==" crossorigin="anonymous"></script>
 <script>
     $('#takesnap').hide();
     $('#close').hide();

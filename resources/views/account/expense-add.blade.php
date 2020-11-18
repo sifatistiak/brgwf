@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'BRGWF Expense')
+@section('title', env('Site_Title', 'BRGWF').' Expense')
 
 @section('content')
 <section class="content">
@@ -22,7 +22,7 @@
                                         <select name="pay_to" id="pay_to">
                                             <option>Select One</option>
                                             @foreach ($members as $member)
-                                                <option value="{{ $member->membership_no }}">{{ $member->full_name }}</option>
+                                            <option value="{{ $member->membership_no }}">{{ $member->full_name }}</option>
                                             @endforeach
                                         </select>
                                         <span class="input-group-addon col-md-1"></span>

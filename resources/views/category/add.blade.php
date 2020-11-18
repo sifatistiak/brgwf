@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'BRGWF Category Add')
+@section('title', env('Site_Title', 'BRGWF').' Category Add')
 
 @section('content')
 <section class="content">

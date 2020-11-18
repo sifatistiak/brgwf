@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'BRGWF',
+    'title' => env('Site_Title', 'BRGWF'),
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,12 +45,12 @@ return [
     |
     */
 
-    'logo' => '<b>BRGWF</b>',
+    'logo' => '<b>' . env('Site_Title', 'BRGWF') . '</b>',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'BRGWF',
+    'logo_img_alt' => env('Site_Title', 'BRGWF'),
 
     /*
     |--------------------------------------------------------------------------
@@ -440,7 +440,7 @@ return [
                 ],
             ]
         ],
-/*
+        /*
 
         ['header' => 'account_settings'],
         [

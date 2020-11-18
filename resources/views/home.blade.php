@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'BRGWF')
+@section('title', env('Site_Title', 'BRGWF'))
 
 @section('content_header')
 <h1 class="m-0 text-dark">Dashboard</h1>
