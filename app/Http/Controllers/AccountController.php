@@ -33,6 +33,15 @@ class AccountController extends Controller
         return redirect()->back();
     }
 
+    public function collectionDelete($id)
+    {
+        $c = Collection::find($id);
+        $c->delete();
+
+        session()->flash('status', "Deleted Successfully");
+        return redirect()->back();
+    }
+
     public function collectionFilter(Request $request)
     {
         // return $request->all();

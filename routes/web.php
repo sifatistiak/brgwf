@@ -67,6 +67,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('collection/filter', 'App\Http\Controllers\AccountController@collectionFilter')->name('collection.filter');
     Route::get('collection/add', 'App\Http\Controllers\AccountController@collectionCreate')->name('collection.create');
     Route::post('collection', 'App\Http\Controllers\AccountController@collectionStore')->name('collection.store');
+    Route::get('collection-delete/{id}', 'App\Http\Controllers\AccountController@collectionDelete')->name('collection.delete');
+
     //Expense
     Route::get('expense', 'App\Http\Controllers\AccountController@expense')->name('expense.index');
     Route::post('expense/filter', 'App\Http\Controllers\AccountController@expenseFilter')->name('expense.filter');

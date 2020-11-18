@@ -78,6 +78,9 @@
                                 <td> {{ $collection->amount }}</td>
                                 <td> {{ date('d-M-Y', strtotime($collection->transaction_date)) }}</td>
                                 <td> {{ $collection->remarks }}</td>
+                                <td>
+                                    <a class="btn btn-danger" onclick="return confirm('Are you sure?')" href="{{route('collection.delete', $collection->id)}}"><i class="fa fa-trash"></i></a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
