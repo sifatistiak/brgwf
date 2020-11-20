@@ -141,7 +141,7 @@ class AccountController extends Controller
     public function dueCollection()
     {
 
-        $members = Member::where('is_active', 1)->doesnthave('due')->with('collection')->paginate();
+        $members = Member::where('is_active', 1)->doesnthave('due')->with('collection')->paginate(100);
         // $data = Member::where('is_active', 1)->with(['collection' => function ($q) {
         //     $q->where('to_date', '>', date('Y-m-d'))->latest()->first();
         // }])
