@@ -6,6 +6,7 @@ use App\Models\Models\Collection;
 use App\Models\Models\Expense;
 use App\Models\Models\Member;
 use App\Models\Models\NonMember;
+use DateTime;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -26,10 +27,20 @@ class AccountController extends Controller
 
     public function collectionStore(Request $request)
     {
+        $fd = new DateTime($request->from_date);
+        $ld = new DateTime($request->to_date);
+
+        $request->merge([
+            'from_date' => $fd->format('Y-m-01'),
+            'to_date' => $ld->format('Y-m-t'),
+            'amount' => $request->t_amount
+        ]);
+
         // return $request->all();
+
         Collection::create($request->all());
 
-        session()->flash('status', "Created Successfully");
+        session()->flash('status', "Collection Successful");
         return redirect()->back();
     }
 
@@ -130,12 +141,17 @@ class AccountController extends Controller
     public function dueCollection()
     {
 
-        $members = Member::where('is_active', 1)->with(['collection' => function ($q) {
-            $q->where('to_date', '<', date('Y-m-d'))->latest();
-        }])
-        ->paginate(100);
+        $members = Member::where('is_active', 1)->doesnthave('due')->with('collection')->paginate();
+        // $data = Member::where('is_active', 1)->with(['collection' => function ($q) {
+        //     $q->where('to_date', '>', date('Y-m-d'))->latest()->first();
+        // }])
+        // ->whereHas('collection')
+        // ->select('membership_no')
+        // ->paginate();
 
-        // return $members; ->doesntHave('collection')
+        // $members = Member::where('is_active', 1)->whereNotIn('membership_no', $data)->with('collection')->paginate(10);
+
+        // return $members;
 
         return view('account.due', compact('members'));
     }

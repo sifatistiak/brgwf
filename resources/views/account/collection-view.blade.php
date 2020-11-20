@@ -59,11 +59,12 @@
                                 <th>Membership No</th>
                                 <th>Name of Member</th>
                                 <th>Receive No</th>
-                                <th>From Date</th>
-                                <th>To Date</th>
+                                <th>From </th>
+                                <th>To </th>
                                 <th>Receive Amount</th>
                                 <th>Receive Date</th>
                                 <th>Remark</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,8 +74,8 @@
                                 <td> {{ $collection->membership_id }}</td>
                                 <td> {{ $collection->name }}</td>
                                 <td> {{ $collection->bill_type }}</td>
-                                <td> {{ date('d-M-Y', strtotime($collection->from_date)) }}</td>
-                                <td> {{ date('d-M-Y', strtotime($collection->to_date)) }}</td>
+                                <td> {{ date('M-Y', strtotime($collection->from_date)) }}</td>
+                                <td> {{ date('M-Y', strtotime($collection->to_date)) }}</td>
                                 <td> {{ $collection->amount }}</td>
                                 <td> {{ date('d-M-Y', strtotime($collection->transaction_date)) }}</td>
                                 <td> {{ $collection->remarks }}</td>
@@ -93,45 +94,14 @@
 </section>
 @stop
 @section('js')
-<script>
-       function printDiv() {
-            var prtContent = document.getElementById("table-print");
-            var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
-            WinPrint.document.write(prtContent.innerHTML);
-            WinPrint.document.close();
-            WinPrint.focus();
-            WinPrint.print();
-            WinPrint.close();
-       }
-</script>
+
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
 
 <script>
     $.fn.datepicker.defaults.format = "dd-M-yyyy";
-    $('#example').DataTable({
-        dom: 'Bfrtip',
-        'paging': true,
-        'lengthChange': true,
-        'searching': true,
-        'ordering': true,
-        'info': true,
-        'autoWidth': true,
-        buttons: [{
-                extend: 'csvHtml5',
-                "charset": "utf-8"
 
-            },
-            {
-                extend: 'excelHtml5',
-                "charset": "utf-8"
-            },
-            {
-                extend: 'printHtml5'
-            }
-        ]
-    });
 
     $.fn.dataTable.ext.search.push(
         function(settings, data, dataIndex) {

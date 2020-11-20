@@ -25,6 +25,10 @@ class Member extends Model
     }
 
     public function collection(){
-        return $this->hasMany(Collection::class,'membership_id','membership_no');
+        return $this->hasOne(Collection::class,'membership_id','membership_no')->latest();
+    }
+
+    public function due(){
+        return $this->hasOne(Collection::class,'membership_id','membership_no')->where('to_date', '>', date('Y-m-d'))->latest();
     }
 }

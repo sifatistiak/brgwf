@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Collection extends Model
 {
     use HasFactory;
-    protected $guarded = ['save'];
+    protected $guarded = ['save', 't_amount'];
 }

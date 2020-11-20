@@ -38,8 +38,8 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $member->full_name }} / {{ $member->membership_no }}</td>
-                                <td>{{ $member->collection[0]->to_date ?? 'N/A' }}</td>
-                                <td>{{ $member->collection[0]->transaction_date ?? 'N/A' }}</td>
+                                <td>{{ \Carbon\Carbon::parse($member->collection->to_date ?? '01-01-0000')->format('F-Y') }}</td>
+                                <td>{{ date('d-M-Y',strtotime($member->collection->transaction_date ?? '01-01-0000')) }}</td>
                             </tr>
                             @endforeach
                         </tbody>
