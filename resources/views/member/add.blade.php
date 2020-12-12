@@ -21,7 +21,7 @@
                                     <label class="control-label col-md-2" for="union_id">Union</label>
                                     <div class="col-md-11">
                                         <select class="form-control col-md-12" id="union_id" name="union_id">
-                                            <option value="">Select One</option>
+                                            <option >Select One</option>
                                             @foreach ($unions as $union)
                                             <option value="{{ $union->id }}">{{ $union->name }}</option>
                                             @endforeach
@@ -33,7 +33,7 @@
                                     <label class="control-label col-md-2" for="factory_id">Factory</label>
                                     <div class="col-md-11">
                                         <select class="form-control" id="factory_id" name="factory_id">
-                                            <option value="">Select One</option>
+                                            <option >Select One</option>
                                             @foreach ($factories as $factory)
                                             <option value="{{ $factory->id }}">{{ $factory->name }}</option>
                                             @endforeach
@@ -45,14 +45,14 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="firstname">First Name</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="firstname" name="firstname" required="required" type="text" value="">
+                                        <input class="form-control" id="firstname" name="firstname" required="required" type="text" >
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="lastname">Last Name</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="lastname" name="lastname" type="text" value="">
+                                        <input class="form-control" id="lastname" name="lastname" type="text" >
 
                                     </div>
                                 </div>
@@ -90,21 +90,21 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="reg_no">RegNo</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="reg_no" name="reg_no" type="text" value="">
+                                        <input class="form-control" id="reg_no" name="reg_no" type="text" >
 
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="father_name">Father Name</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="father_name" name="father_name" type="text" value="">
+                                        <input class="form-control" id="father_name" name="father_name" type="text" >
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="mother_name">Mother Name</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="mother_name" name="mother_name" type="text" value="">
+                                        <input class="form-control" id="mother_name" name="mother_name" type="text" >
                                     </div>
                                 </div>
 
@@ -129,7 +129,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="spouse_name">Spouse Name</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="spouse_name" name="spouse_name" type="text" value="">
+                                        <input class="form-control" id="spouse_name" name="spouse_name" type="text" >
 
                                     </div>
                                 </div>
@@ -160,14 +160,14 @@
                                     Snapshot</a>
                                 <a id="close" class="btn btn-danger" href="javascript:void(hideCamera())">Close</a>
 
-                                <input id="webimg" type="hidden" name="webimg" value="" />
+                                <input id="webimg" type="hidden" name="webimg"  />
 
                                 <div class="clearfix"></div>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="mobile">Mobile</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="mobile" name="mobile" type="text" value="">
+                                        <input class="form-control" id="mobile" name="mobile" type="text" >
                                     </div>
                                 </div>
 
@@ -187,7 +187,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="nid">NID No</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="nid" name="nid" type="text" value="">
+                                        <input class="form-control" id="nid" name="nid" type="text">
 
                                     </div>
                                 </div>
@@ -195,7 +195,7 @@
                                     <label class="control-label col-md-4" for="designation_id">Designation</label>
                                     <div class="col-md-9">
                                         <select class="form-control" id="designation_id" name="designation_id">
-                                            <option value="">Select One</option>
+                                            <option >Select One</option>
                                             @foreach ($designations as $designation)
                                             <option value="{{ $designation->id }}">{{ $designation->name }}</option>
                                             @endforeach
@@ -209,7 +209,7 @@
                                     <label class="control-label col-md-4" for="category_id">Member Categories</label>
                                     <div class="col-md-9">
                                         <select class="form-control" id="category_id" name="category_id">
-                                            <option value="">Select One</option>
+                                            <option >Select One</option>
                                             @foreach ($member_categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
@@ -221,7 +221,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="joining_date">Joining Date</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="joining_date" name="joining_date" type="date" value="">
+                                        <input class="form-control" id="joining_date" name="joining_date" type="date" >
                                     </div>
                                 </div>
 
@@ -230,14 +230,14 @@
                                     <label class="control-label col-md-4" for="FactoryJoiningDate">Factory(Join)
                                         Date</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="factory_joining_date" name="factory_joining_date" type="date" value="">
+                                        <input class="form-control" id="factory_joining_date" name="factory_joining_date" type="date" >
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="factory_id_no">Factory Id</label>
                                     <div class="col-md-9">
-                                        <input class="form-control" id="factory_id_no" name="factory_id_no" type="text" value="">
+                                        <input class="form-control" id="factory_id_no" name="factory_id_no" type="text" >
 
                                     </div>
                                 </div>

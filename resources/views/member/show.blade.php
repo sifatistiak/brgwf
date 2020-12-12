@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'BRGWF Member Edit')
+@section('title', env('Site_Title', 'BRGWF').' Member Edit')
 
 @section('content')
 <style>
@@ -52,7 +52,7 @@
             </tr>
             <tr>
                 <td>Date Of Birth</td>
-                <td>{{ $member->date_of_birth }}</td>
+                <td>{{ date('d/m/Y',strtotime($member->date_of_birth)) }}</td>
             </tr>
             <tr>
                 <td>Blood Group</td>
@@ -60,7 +60,7 @@
             </tr>
             <tr>
                 <td>Religion</td>
-                <td>{{ $member->religion }}</td>
+                <td>{{ $member->religion->name }}</td>
             </tr>
             <tr>
                 <td>Education</td>

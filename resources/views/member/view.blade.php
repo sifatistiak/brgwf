@@ -107,7 +107,7 @@
                                     {{ $member->mother_name }}
                                 </td>
                                 <td>
-                                    {{ date('d-M-y',strtotime($member->dob)) }} <br>
+                                    {{ date('d-M-y',strtotime($member->date_of_birth)) }} <br>
                                     {{ $member->religion->name ?? 'N/A' }} <br>
                                     {{ $member->gender }}
                                 </td>
