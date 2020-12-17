@@ -78,6 +78,8 @@
                                     <label class="control-label col-md-4" for="blood_group">Blood Group</label>
                                     <div class="col-md-9">
                                         <select class="form-control" id="blood_group" name="blood_group">
+                                            <option value="N/A" {{ ($member->blood_group == "N/A") ? "selected" : "" }}>A+
+                                            </option>
                                             <option value="A+" {{ ($member->blood_group == "A+") ? "selected" : "" }}>A+
                                             </option>
                                             <option value="A-" {{ ($member->blood_group == "A-") ? "selected" : "" }}>A-
